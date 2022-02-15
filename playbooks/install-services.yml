@@ -13,4 +13,4 @@
           name:
             - httpd
             - php
-        state: present
+          state: present
