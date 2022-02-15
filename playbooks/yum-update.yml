@@ -2,7 +2,7 @@
 ---
 
   - hosts: webservers:loadbalancers
-    sudo: true
+    become: true
     tasks:
       - name: Update yum packages
         yum:
