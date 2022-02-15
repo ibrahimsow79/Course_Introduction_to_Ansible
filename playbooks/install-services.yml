@@ -3,13 +3,14 @@
 ---
   - hosts: loadbalancers
     tasks:
-      -name: installing Apache
+      - name: installing Apache
         yum: name=httpd state=present
 
   - hosts: webservers
     tasks:
-      -name: installing services
+      - name: installing services
         yum:
-          - httpd
-          - php
+          name:
+            - httpd
+            - php
         state: present
