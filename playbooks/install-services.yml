@@ -2,11 +2,13 @@
 
 ---
   - hosts: loadbalancers
+    become: true
     tasks:
       - name: installing Apache
         yum: name=httpd state=present
 
   - hosts: webservers
+    become: true
     tasks:
       - name: installing services
         yum:

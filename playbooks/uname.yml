@@ -1,6 +1,8 @@
 ---
 
-  - hosts: webservers:loadbalancers
-    tasks:
-    - name: Get OS type
-      shell: uname -a
+- name: Get OS type
+  hosts: webservers:loadbalancers
+  
+  tasks:
+  - name: Get OS type
+    shell: uname -a
