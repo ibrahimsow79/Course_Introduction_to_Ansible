@@ -6,3 +6,4 @@
   import_playbook: install-services.yml
   import_playbook: setup-app.yml
   import_playbook: setup-lb.yml
+  import_playbook: check-status.yml
