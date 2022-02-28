@@ -1,0 +1,10 @@
+# check status-yml
+
+---
+
+- name: check the status of Apache
+  hosts: webservers:loadbalancers
+  become: true
+  tasks:
+  - name: Check the status of Apachhe
+    command: service httpd status
