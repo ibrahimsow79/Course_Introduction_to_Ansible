@@ -1,0 +1,8 @@
+#setup-app.yml
+
+---
+- name: Set up the PHP application
+  hosts: webservers
+  become: true
+  roles:
+    - webservers
