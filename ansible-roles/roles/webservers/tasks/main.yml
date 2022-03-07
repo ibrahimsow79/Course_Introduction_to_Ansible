@@ -3,7 +3,7 @@
 
 - name: Upload application file
   copy:
-    src: ../index.php
+    src: ../files/index.php
     dest: "{{path_to_app}}"
     mode: 0755
 
@@ -23,6 +23,6 @@
   command: ls -ail {{path_to_app}}
   register: dir_contents
 
-  - name: Debug directory contents
-    debug:
-      msg: "{{dir_contents}}"
+- name: Debug directory contents
+  debug:
+    msg: "{{dir_contents}}"

@@ -4,37 +4,5 @@
 - name: Set up the PHP application
   hosts: webservers
   become: true
-  vars:
-    path_to_app: "/var/www/html"
-
-  tasks:
-  - name: Upload application file
-    copy:
-      src: ../index.php
-      dest: "{{path_to_app}}"
-      mode: 0755
-  - name: Configure php.ini file
-    lineinfile:
-      path: /etc/php.ini
-      regexp: ^short_open_tag
-      line: 'short_open_tag=On'
-    notify: restart apache
-
-  - name: Create simple php application
-    copy:
-      dest: "{{path_to_app}}/info.php"
-      content: "<h1> Info about Webserever {{ansible_hostname}} </h1>"
-
-  - name: See directory contents
-    command: ls -ail {{path_to_app}}
-    register: dir_contents
-
-  - name: Debug directory contents
-    debug:
-      msg: "{{dir_contents}}"
-
-  handlers:  
-  - name: restart apache
-    service: 
-      name: httpd
-      state: restarted
+  roles:
+    - webservers
