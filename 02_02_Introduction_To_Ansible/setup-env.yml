@@ -26,6 +26,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Join [ '-', [ !Ref NameOfService, 'webserver' ,'1'] ]
+        - Key: Projet
+          Value: Ansible
       SecurityGroups:
         - !Ref LnSecurityGroup
       KeyName: !Ref KeyName
@@ -41,6 +43,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Join [ '-', [ !Ref NameOfService, 'webserver' ,'2'] ]
+        - Key: Projet
+          Value: Ansible
       SecurityGroups:
         - !Ref LnSecurityGroup
       KeyName: !Ref KeyName
@@ -56,6 +60,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Join [ '-', [ !Ref NameOfService, 'load-balancer'] ]
+        - Key: Projet
+          Value: Ansible
       SecurityGroups:
         - !Ref LnSecurityGroup
       KeyName: !Ref KeyName

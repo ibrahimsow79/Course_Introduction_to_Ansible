@@ -14,4 +14,4 @@
       ec2_region: "{{AWS_REGION}}"
       state: stopped  
       instance_tags:
-        aws:cloudformation:stack-name: ansible_training
+        Projet: Ansible
