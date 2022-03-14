@@ -1,7 +1,7 @@
 # aws-acg-sandbox.yml
 ---
 - name: Start or stop instances in my ansible lab
-  hosts: local
+  hosts: localhost
   vars:
     instance_ids:
       - 'i-09a68b6d5f8a7c916'
@@ -21,7 +21,7 @@
       tags: 
         - start
 
-    - name: Stop ansible-sand
+    - name: Stop ansible-sandboxes
       ec2:
         instance_ids: '{{ instance_ids }}'
         region: '{{ region }}'

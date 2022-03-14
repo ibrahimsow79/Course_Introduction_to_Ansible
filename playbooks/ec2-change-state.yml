@@ -1,0 +1,17 @@
+# stop all instances with a specific tag
+
+---
+- name: stop ec2 instances with a specific tag
+  hosts: webservers
+  gather_facts: yes
+  var_files:
+    - ../vars/secret-variables.yml
+  tasks:
+  - name: Change instances state by tag
+    ec2:
+      aws_access_key: "{{AWS_ACCESS_KEY_ID}}"
+      aws_secret_key: "{{AWS_SECRET_ACCESS_KEY}}"
+      ec2_region: "{{AWS_REGION}}"
+      state: stopped  
+      instance_tags:
+        aws:cloudformation:stack-name: ansible_training
