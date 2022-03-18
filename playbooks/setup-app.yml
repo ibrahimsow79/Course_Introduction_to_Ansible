@@ -17,7 +17,6 @@
       prompt: "Create info.php file"
 
   tasks:
-
   - name: Use Secret password here
     debug:
       msg: "{{ secret_password }}"
