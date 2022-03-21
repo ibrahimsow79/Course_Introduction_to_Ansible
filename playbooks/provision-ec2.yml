@@ -1,0 +1,50 @@
+#provision-ec2.yml
+
+---
+
+- name: Change ec2 instances state by tag
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - ../vars/keys.yml
+  tasks:
+    - name: Provision an ec2 instance
+      ec2:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        ec2_region: "{{ AWS_REGION }}"
+        instance _type: t2.micro
+        keypair: ansible-key-pair
+        image: ami-0ff8a91507f77f867
+        vpc_subnet_id: subnet-d1a356fb
+        group: ansible-training-LnSecurityGroup-HYA8JG4T9JQC
+        wait: true
+        exact_count: 1
+        count_tag:
+          Name: Demo-Ansible
+        instance_tags:
+          Name: Demo-Ansible
+      register: ec2
+    
+    - debug:
+        var:ec2
+
+    - name: add host to inventory
+      add_host:
+        hosthame: "{{ item.public_ip }}"
+        groupname: demogroup
+        ansible_ssh_commmon_args: " -o StrictHostKeyChecking=no"
+        ansible_ssh_private_key_file: /home/isow12/.ssh/ansible-key-pair.pem
+      loop: "{{ec2_instances}}"
+
+  hosts: demogroup
+  gather_facts: no
+  remote_user: ec2-user
+  tasks:
+    - name: Wait for SSH to connect
+      wait_for_connection:
+        delay: 5
+        timeout: 90
+    
+    - name: Check host status
+      ping:
