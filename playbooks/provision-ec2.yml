@@ -1,8 +1,6 @@
 #provision-ec2.yml
-
 ---
-
-- name: Change ec2 instances state by tag
+- name: EC2 instance creation
   hosts: localhost
   gather_facts: no
   vars_files:
@@ -24,11 +22,9 @@
           Name: Demo-Ansible
         instance_tags:
           Name: Demo-Ansible
-      register: ec2
-    
+      register: ec2 
     - debug:
         var:ec2
-
     - name: add host to inventory
       add_host:
         hosthame: "{{ item.public_ip }}"
