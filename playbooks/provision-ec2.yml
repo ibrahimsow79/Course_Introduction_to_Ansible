@@ -11,9 +11,10 @@
         aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
         aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
         ec2_region: "{{ AWS_REGION }}"
-        instance _type: t2.micro
+        instance_type: t2.micro
         keypair: ansible-key-pair
         image: ami-0ff8a91507f77f867
+        assign_public_ip: yes
         vpc_subnet_id: subnet-d1a356fb
         group: ansible-training-LnSecurityGroup-HYA8JG4T9JQC
         wait: true
@@ -23,16 +24,20 @@
         instance_tags:
           Name: Demo-Ansible
       register: ec2 
-    - debug:
-        var:ec2
+
+    - name: Print out EC2 Items
+      debug:
+        var: ec2
+
     - name: add host to inventory
       add_host:
-        hosthame: "{{ item.public_ip }}"
+        hostname: "{{ item.public_ip }}"
         groupname: demogroup
         ansible_ssh_commmon_args: " -o StrictHostKeyChecking=no"
         ansible_ssh_private_key_file: /home/isow12/.ssh/ansible-key-pair.pem
-      loop: "{{ec2_instances}}"
+      loop: "{{ec2.instances}}"
 
+- name: pinging and connecting to the EC2 instance
   hosts: demogroup
   gather_facts: no
   remote_user: ec2-user
