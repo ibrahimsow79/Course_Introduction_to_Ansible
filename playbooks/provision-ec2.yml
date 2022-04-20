@@ -18,7 +18,7 @@
         vpc_subnet_id: subnet-d1a356fb
         group: ansible-training-LnSecurityGroup-HYA8JG4T9JQC
         wait: true
-        exact_count: 1
+        exact_count: 4
         count_tag:
           Name: Demo-Ansible
         instance_tags:
